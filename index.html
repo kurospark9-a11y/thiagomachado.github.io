@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Portafolio Digital</title>
+    <meta name="description" content="Portafolio de Thiago Tristán Machado Díaz, estudiante de Ingeniería en Ciencias Informáticas en la UCI e interesado en el desarrollo web.">
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #0b1020;
+            --surface: #121a2d;
+            --text: #edf2ff;
+            --muted: #a6b0c7;
+            --accent: #6ee7d2;
+            --accent-2: #a78bfa;
+            --line: rgba(210, 224, 255, .13);
+        }
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            background: radial-gradient(ellipse at 85% 4%, rgba(86, 73, 176, .2), transparent 34rem), var(--bg);
+            color: var(--text);
+            font: 16px/1.65 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+        a { color: inherit; }
+        .container { width: min(1080px, calc(100% - 40px)); margin-inline: auto; }
+        header { border-bottom: 1px solid var(--line); }
+        .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+        .brand { font-weight: 800; letter-spacing: -.04em; font-size: 1.2rem; text-decoration: none; }
+        .brand span { color: var(--accent); }
+        nav { display: flex; gap: 26px; flex-wrap: wrap; }
+        nav a { color: var(--muted); font-size: .92rem; text-decoration: none; }
+        nav a:hover, nav a:focus-visible { color: var(--accent); }
+        .hero { min-height: 590px; display: grid; grid-template-columns: 1.35fr .65fr; align-items: center; gap: 50px; padding-block: 80px; }
+        .eyebrow { color: var(--accent); font-size: .82rem; font-weight: 750; letter-spacing: .14em; text-transform: uppercase; }
+        h1 { max-width: 720px; margin: 14px 0 20px; font-size: clamp(2.8rem, 7vw, 5.2rem); line-height: 1.03; letter-spacing: -.065em; }
+        h1 span { color: var(--accent); }
+        .intro { max-width: 620px; color: var(--muted); font-size: 1.13rem; }
+        .actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 30px; }
+        .button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 10px 18px; border: 1px solid var(--line); border-radius: 9px; font-weight: 700; text-decoration: none; transition: transform .2s, border-color .2s; }
+        .button:hover { transform: translateY(-2px); border-color: var(--accent); }
+        .button.primary { color: #071411; background: var(--accent); border-color: var(--accent); }
+        .portrait { width: min(290px, 70vw); aspect-ratio: 1; display: grid; place-items: center; justify-self: center; border: 1px solid rgba(110, 231, 210, .4); border-radius: 32% 68% 57% 43% / 43% 39% 61% 57%; background: linear-gradient(145deg, rgba(110,231,210,.17), rgba(167,139,250,.2)); box-shadow: 0 0 90px rgba(110,231,210,.08); }
+        .portrait span { font-size: clamp(4.4rem, 12vw, 7rem); font-weight: 850; letter-spacing: -.1em; color: var(--accent); }
+        section { padding-block: 78px; border-top: 1px solid var(--line); }
+        .section-heading { margin: 0 0 10px; font-size: clamp(1.8rem, 4vw, 2.5rem); letter-spacing: -.04em; }
+        .section-lead { max-width: 680px; margin: 0 0 34px; color: var(--muted); }
+        .about-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 48px; align-items: start; }
+        .about-grid p { margin-top: 0; color: var(--muted); }
+        .info-card, .project-card, .skill-card { border: 1px solid var(--line); border-radius: 14px; background: rgba(18, 26, 45, .78); }
+        .info-card { padding: 22px; }
+        .info-card strong { display: block; margin-bottom: 5px; }
+        .info-card p { margin: 0; }
+        .skills { display: flex; flex-wrap: wrap; gap: 10px; }
+        .skill { padding: 8px 13px; border: 1px solid var(--line); border-radius: 999px; color: #d7def0; background: rgba(255,255,255,.025); font-size: .91rem; }
+        .projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        .project-card { padding: 23px; display: flex; flex-direction: column; min-height: 230px; }
+        .project-number { color: var(--accent-2); font-size: .82rem; font-weight: 800; letter-spacing: .1em; }
+        .project-card h3 { margin: 13px 0 8px; font-size: 1.15rem; }
+        .project-card p { margin: 0; color: var(--muted); font-size: .94rem; }
+        .contact-box { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding: 30px; border: 1px solid rgba(110,231,210,.25); border-radius: 16px; background: linear-gradient(120deg, rgba(110,231,210,.08), rgba(167,139,250,.08)); }
+        .contact-box p { max-width: 590px; margin: 0; color: var(--muted); }
+        footer { padding-block: 24px; color: var(--muted); font-size: .88rem; }
+        footer .container { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+        :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+        @media (max-width: 760px) {
+            .nav { align-items: flex-start; flex-direction: column; justify-content: center; padding-block: 17px; gap: 10px; }
+            nav { gap: 17px; }
+            .hero { min-height: auto; grid-template-columns: 1fr; gap: 35px; padding-block: 64px; }
+            .portrait { grid-row: 1; width: 185px; }
+            .about-grid, .projects { grid-template-columns: 1fr; }
+            section { padding-block: 58px; }
+            .contact-box { align-items: flex-start; flex-direction: column; }
+        }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav">
+            <a class="brand" href="#inicio" aria-label="Thiago Machado, inicio">TM<span>.</span></a>
+            <nav aria-label="Navegación principal">
+                <a href="#sobre-mi">Sobre mí</a>
+                <a href="#habilidades">Habilidades</a>
+                <a href="#proyectos">Proyectos</a>
+                <a href="#contacto">Contacto</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="container hero" id="inicio" aria-labelledby="hero-title">
+            <div>
+                <div class="eyebrow">Estudiante · Desarrollador web en formación</div>
+                <h1 id="hero-title">Hola, soy <span>Thiago</span>.</h1>
+                <p class="intro">Thiago Tristán Machado Díaz — estudiante de Ingeniería en Ciencias Informáticas en la UCI. Me interesa crear experiencias web útiles, accesibles y bien diseñadas.</p>
+                <div class="actions">
+                    <a class="button primary" href="#proyectos">Ver proyectos</a>
+                    <a class="button" href="#contacto">Hablemos</a>
+                </div>
+            </div>
+            <div class="portrait" aria-label="Iniciales de Thiago Tristán Machado Díaz"><span>TM</span></div>
+        </section>
+
+        <section id="sobre-mi" aria-labelledby="about-title">
+            <div class="container about-grid">
+                <div>
+                    <div class="eyebrow">Un poco sobre mí</div>
+                    <h2 class="section-heading" id="about-title">Aprender, construir, mejorar.</h2>
+                    <p>Estudio Ingeniería en Ciencias Informáticas en la Universidad de las Ciencias Informáticas (UCI). Disfruto explorar cómo se conectan el diseño y la programación para resolver problemas cotidianos desde la web.</p>
+                    <p>Estoy en constante aprendizaje y me motiva colaborar, experimentar con nuevas ideas y convertirlas en proyectos claros y funcionales.</p>
+                </div>
+                <aside class="info-card">
+                    <strong>Actualmente</strong>
+                    <p>Formándome en desarrollo web y fortaleciendo mis bases de programación.</p>
+                </aside>
+            </div>
+        </section>
+
+        <section id="habilidades" aria-labelledby="skills-title">
+            <div class="container">
+                <div class="eyebrow">Mi caja de herramientas</div>
+                <h2 class="section-heading" id="skills-title">Habilidades e intereses</h2>
+                <p class="section-lead">Tecnologías y áreas que estoy aprendiendo y explorando.</p>
+                <div class="skills" aria-label="Habilidades">
+                    <span class="skill">HTML5</span><span class="skill">CSS3</span><span class="skill">JavaScript</span>
+                    <span class="skill">Diseño adaptable</span><span class="skill">Accesibilidad web</span>
+                    <span class="skill">Desarrollo frontend</span><span class="skill">Aprendizaje continuo</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="proyectos" aria-labelledby="projects-title">
+            <div class="container">
+                <div class="eyebrow">En práctica</div>
+                <h2 class="section-heading" id="projects-title">Proyectos</h2>
+                <p class="section-lead">Ideas y ejercicios para seguir creciendo como desarrollador. Aquí irán mis trabajos y sus enlaces cuando estén publicados.</p>
+                <div class="projects">
+                    <article class="project-card">
+                        <span class="project-number">01 · WEB</span>
+                        <h3>Portafolio personal</h3>
+                        <p>Un espacio para presentar mi perfil, intereses y próximos trabajos con una interfaz adaptable.</p>
+                    </article>
+                    <article class="project-card">
+                        <span class="project-number">02 · INTERFAZ</span>
+                        <h3>Experimentos frontend</h3>
+                        <p>Prácticas de maquetación y componentes para aprender a crear páginas claras y accesibles.</p>
+                    </article>
+                    <article class="project-card">
+                        <span class="project-number">03 · EN PROGRESO</span>
+                        <h3>Próximo proyecto</h3>
+                        <p>Estoy preparando nuevas ideas. Pronto compartiré aquí más detalles y resultados.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" aria-labelledby="contact-title">
+            <div class="container">
+                <div class="contact-box">
+                    <div>
+                        <div class="eyebrow">Contacto</div>
+                        <h2 class="section-heading" id="contact-title">¿Creamos algo juntos?</h2>
+                        <p>Estoy abierto a intercambiar ideas, aprender en equipo y conversar sobre desarrollo web.</p>
+                    </div>
+                    <a class="button primary" href="mailto:">Escríbeme</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container"><span>© 2025 Thiago Tristán Machado Díaz</span><span>Hecho con curiosidad y código.</span></div>
+    </footer>
+</body>
+</html>
